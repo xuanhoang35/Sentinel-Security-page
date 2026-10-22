@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Sentinel Admin Login</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="stylesheet" href="/assets/admin.css" />
+  </head>
+  <body class="admin-body">
+    <main class="admin-auth-wrap">
+      <section class="admin-card">
+        <p class="admin-eyebrow">Admin Portal</p>
+        <h1>Đăng nhập quản trị</h1>
+        <form id="admin-login-form" novalidate>
+          <label for="admin-email">Email</label>
+          <input
+            id="admin-email"
+            name="email"
+            type="email"
+            autocomplete="username"
+            required
+          />
+
+          <label for="admin-password">Mật khẩu</label>
+          <input
+            id="admin-password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            required
+          />
+
+          <button type="submit">Đăng nhập</button>
+          <p id="admin-login-note" class="admin-note" aria-live="polite"></p>
+        </form>
+      </section>
+    </main>
+    <script src="/assets/admin-login.js?v=20260305-8" defer></script>
+  </body>
+</html>
