@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="theme-color" content="#05070d" />
+    <title>SetupDev Command Center | webdemo.name.vn</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="stylesheet" href="/assets/setupdev.css?v=20260720-3" />
+    <script src="/assets/setupdev.js?v=20260720-5" defer></script>
+  </head>
+  <body>
+    <div class="scene" aria-hidden="true"><span></span><span></span></div>
+    <main class="shell">
+      <aside class="sidebar">
+        <a class="brand" href="/setupdev" aria-label="SetupDev">
+          <span class="brand-mark"></span>
+          <span><strong>SetupDev</strong><small>Deployment Command</small></span>
+        </a>
+        <nav class="project-tabs" aria-label="Chọn hệ thống">
+          <button class="project-tab active" data-project="sentinel"><span>01</span><strong>Sentinel Shield</strong><small>Landing, admin, storage, learnit</small></button>
+          <button class="project-tab" data-project="ttfood"><span>02</span><strong>Trần Thái Food</strong><small>tranthaifood.vn / MongoDB / MinIO</small></button>
+          <button class="project-tab" data-project="intsoft"><span>03</span><strong>Intsoft / CodeBank</strong><small>codebank.vn / Next.js</small></button>
+          <button class="project-tab" data-project="mtthanglong"><span>04</span><strong>MTThangLong / ENSERCO</strong><small>enserco.com.vn / NestJS / MariaDB</small></button>
+        </nav>
+        <a class="home-link" href="/">Về Sentinel Shield</a>
+      </aside>
+
+      <section class="workspace">
+        <header class="hero">
+          <p class="eyebrow">Setup runbook</p>
+          <h1>Triển khai hệ thống từ server trống tới production</h1>
+          <p>Trang này gom link tải, cấu hình Nginx, Cloudflare, database, PM2/systemd, backup, monitoring, security hardening và câu lệnh triển khai. Bấm đúp vào ô lệnh để copy.</p>
+          <div class="hero-actions">
+            <button id="expand-all" type="button">Mở toàn bộ mục</button>
+            <button id="collapse-all" type="button">Thu gọn</button>
+            <input id="setup-search" type="search" placeholder="Tìm: nginx, cloudflare, backup, database, pm2..." />
+          </div>
+        </header>
+        <div id="project-output" class="project-output"><section class="section"><h3>Đang tải nội dung SetupDev...</h3><p>Nếu dòng này không tự đổi sau vài giây, hãy bấm Ctrl + F5 để tải lại file JavaScript mới.</p></section></div>
+      </section>
+
+      <aside class="quick-panel">
+        <section class="quick-card">
+          <p class="eyebrow">Quick jump</p>
+          <h2>Mục lục</h2>
+          <div id="quick-list" class="quick-list"></div>
+        </section>
+        <section class="quick-card">
+          <p class="eyebrow">Deploy rule</p>
+          <h2>Quy tắc an toàn</h2>
+          <ul class="rule-list">
+            <li>Không đưa secret thật vào tài liệu public.</li>
+            <li>Luôn `nginx -t` trước khi reload.</li>
+            <li>Backup/snapshot trước migration lớn.</li>
+            <li>Có rollback path trước khi deploy.</li>
+            <li>Verify bằng `/health`, log, metric, dashboard.</li>
+          </ul>
+        </section>
+      </aside>
+    </main>
+    <div id="toast" class="toast" role="status"></div>
+  </body>
+</html>
