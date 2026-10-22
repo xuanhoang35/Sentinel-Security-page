@@ -1,0 +1,300 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+  <meta name="theme-color" content="#f5f2eb">
+  <meta name="description" content="Convertit — chuyển đổi, xem trước và chỉnh sửa tài liệu, PDF, ảnh ngay trên trình duyệt.">
+  <title>Convertit — Chuyển đổi & chỉnh sửa file</title>
+  <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg">
+  <link rel="manifest" href="/convertit/manifest.webmanifest">
+  <link rel="stylesheet" href="/convertit/styles.css?v=83">
+  <style>
+    .media-selection{z-index:6;pointer-events:none}.media-selection span{pointer-events:auto;cursor:ew-resize;z-index:7;top:-14px;width:10px;height:calc(100% + 28px);border-radius:2px;background:#16e5f0!important;box-shadow:0 0 0 1px rgba(255,255,255,.72),0 0 14px rgba(22,229,240,.55)}.media-selection span:first-child{left:-5px}.media-selection span:last-child{right:-5px}.media-selection span:before{display:none}.media-selection span:after{content:attr(data-time);position:absolute;top:calc(100% + 8px);left:50%;transform:translateX(-50%);white-space:nowrap;color:#15e8f1;font:700 11px/1 ui-monospace,monospace}.media-timeline:before{content:"";position:absolute;z-index:2;inset:14px;pointer-events:none;background:linear-gradient(to right,rgba(5,18,59,.62) 0 var(--media-start,0%),transparent var(--media-start,0%) var(--media-end,100%),rgba(5,18,59,.62) var(--media-end,100%) 100%)}.media-timeline canvas{position:relative;z-index:1}.media-playhead{z-index:8}
+  </style>
+  <style>
+    .media-mode .media-workspace{background:linear-gradient(180deg,#063d7c 0%,#1f255d 68%,#29205c 100%);padding:24px 40px 34px;gap:18px}.media-mode .media-workspace audio,.media-mode .media-workspace video{display:none}.media-mode .media-cutter .media-timeline{width:100%;max-width:none;padding:0;background:#154a82;border-radius:0;box-shadow:none}.media-mode .media-cutter .media-timeline canvas{width:100%;height:170px;margin:0}.media-mode .media-timeline:before{inset:0;background:linear-gradient(to right,rgba(7,20,67,.68) 0 var(--media-start,0%),transparent var(--media-start,0%) var(--media-end,100%),rgba(7,20,67,.68) var(--media-end,100%) 100%)}.media-mode .media-cutter.media-cut-outside .media-timeline:before{background:linear-gradient(to right,transparent 0 var(--media-start,0%),rgba(7,20,67,.68) var(--media-start,0%) var(--media-end,100%),transparent var(--media-end,100%) 100%)}.media-mode .media-selection{inset:0;border:0;box-shadow:none;pointer-events:none}.media-mode .media-selection span{display:none}.media-mode .media-range{z-index:9;top:0;bottom:auto;left:0;width:100%;height:170px;pointer-events:none;touch-action:none}.media-mode .media-range::-webkit-slider-thumb{width:8px;height:112px;margin-top:-53px;border:0;border-radius:3px;background:#18e6ee;box-shadow:0 0 0 1px rgba(255,255,255,.7),0 0 12px rgba(24,230,238,.45);pointer-events:auto}.media-mode .media-range::-moz-range-thumb{width:8px;height:112px;border:0;border-radius:3px;background:#18e6ee;box-shadow:0 0 0 1px rgba(255,255,255,.7),0 0 12px rgba(24,230,238,.45);pointer-events:auto}.media-mode .media-playhead{top:-10px;bottom:-10px}.media-mode .media-inline-options{display:none}.media-mode .media-cutter-controls{justify-content:flex-start;width:100%;gap:20px}.media-mode .media-cutter-controls output{color:#fff;min-width:170px}.media-mode .media-cutter-controls button{background:#17245e}.media-mode .media-cutter-controls button:first-child{background:#17245e;color:#fff}.media-mode .media-download-btn{margin-left:auto;background:#12181b;color:#fff;min-width:100px}.media-mode .media-cutter-controls button[id="mediaSetStartBtn"],.media-mode .media-cutter-controls button[id="mediaSetEndBtn"]{display:none}
+  </style>
+  <style>.media-mode .toolbar{display:none}.media-mode .statusbar{display:none}.media-mode .file-panel{display:none}.media-mode .workspace{grid-template-columns:1fr}.media-mode .editor-shell{grid-column:1}</style>
+  <style>.media-top-tools{display:flex;align-items:center;gap:2px;width:100%;padding:2px 0 18px}.media-top-tools button{height:34px;border:0;border-radius:7px;padding:0 14px;background:rgba(4,34,77,.62);color:#c3d9ee;font-size:12px;font-weight:650;cursor:pointer}.media-top-tools button:hover,.media-top-tools button.active{background:#0b315f;color:#fff}.media-top-tools button.reset{margin-left:auto;background:transparent}.show-inline{display:flex!important}</style>
+<style>
+  .media-mode .media-position-fields{order:1;display:inline-flex;align-items:center;gap:12px;padding:10px 14px;border-radius:16px;background:#11194d;box-shadow:0 7px 18px rgba(5,5,35,.2)}.media-mode .media-position-fields input{width:78px;border:0;outline:0;background:transparent;color:#f5f3ff;font:700 15px/1 ui-monospace,monospace;text-align:center}.media-mode .media-position-fields input::-webkit-inner-spin-button{opacity:.7;filter:invert(1)}.media-mode .media-position-fields input::-moz-inner-spin-button{opacity:.7}.media-mode .media-cutter-controls>#mediaCutModeBtn{display:none!important}
+  .media-mode .media-cutter-controls>#mediaPlayBtn{display:inline-flex!important;order:0!important}.media-mode .media-output-format{order:4;height:42px;padding:0 14px;border:1px solid rgba(149,235,255,.32);border-radius:11px;background:#11194d;color:#f5f3ff;font-weight:750}.media-mode .media-save-btn{order:5;border:0;border-radius:11px;padding:12px 20px;background:#111a1c;color:#fff;font-weight:800;cursor:pointer}.media-mode .media-save-btn:hover{background:#173e45}
+  .media-mode .media-range{height:170px!important;opacity:1!important;top:0!important;bottom:auto!important;z-index:9!important}
+  .media-mode .media-range-start::-webkit-slider-thumb,.media-mode .media-range-start::-moz-range-thumb{background:#ffd166!important;box-shadow:0 0 0 1px rgba(255,255,255,.85),0 0 12px rgba(255,209,102,.55)}
+  .media-mode .media-range-end::-webkit-slider-thumb,.media-mode .media-range-end::-moz-range-thumb{background:#ff9f68!important;box-shadow:0 0 0 1px rgba(255,255,255,.85),0 0 12px rgba(255,159,104,.55)}
+  .media-mode .media-cutter-controls{justify-content:flex-start!important;gap:10px!important}.media-mode .media-cutter-controls>#mediaPlayBtn,.media-mode .media-cutter-controls>#mediaSetStartBtn,.media-mode .media-cutter-controls>#mediaSetEndBtn{display:none!important}.media-mode .media-cutter-controls>#mediaTimeLabel{order:1;min-width:auto!important;padding:0 4px;color:#f4efff!important;font-size:16px;font-weight:600;white-space:nowrap}.media-mode .media-nudge-controls{order:2;display:inline-flex;align-items:center;gap:3px;padding:4px;border:1px solid rgba(127,153,255,.65);border-radius:11px;background:rgba(12,20,72,.58);box-shadow:0 5px 18px rgba(5,5,35,.18)}.media-mode .media-nudge-controls button{border:1px solid transparent!important;border-radius:7px!important;padding:8px 10px!important;background:#263477!important;color:#e7eaff!important;font-size:12px;font-weight:750;cursor:pointer}.media-mode .media-nudge-controls button:hover{background:#304696!important;color:#fff!important}.media-mode .media-cut-length{display:none!important}.media-mode .media-cut-mode-btn{order:3;margin-left:8px;padding:9px 12px!important;font-size:11px!important}
+</style>
+<style>
+  .media-mode .media-cutter-controls{display:flex!important;align-items:center!important;justify-content:flex-start!important;position:relative!important;min-height:52px!important;gap:10px!important}
+  .media-mode .media-cutter-controls>#mediaPlayBtn{display:inline-flex!important;visibility:visible!important;order:0!important;position:static!important}
+  .media-mode .media-position-fields{display:inline-flex!important;order:1!important;position:static!important;visibility:visible!important}
+  .media-mode .media-position-fields input{display:block!important;visibility:visible!important}
+  .media-mode .media-cutter-controls>#mediaDownloadBtn,.media-mode .media-download-btn{order:8!important;margin-left:auto!important}
+  .media-mode .media-output-format{order:9!important}.media-mode .media-save-btn{order:10!important}
+  .media-mode .media-selection span{display:block!important;pointer-events:auto!important;position:absolute!important;top:0!important;width:8px!important;height:100%!important;border-radius:3px!important;background:#ffd166!important;z-index:12!important;cursor:ew-resize!important}
+  .media-mode .media-selection span:first-child{left:-4px}.media-mode .media-selection span:last-child{right:-4px;background:#ff9f68!important}
+  .media-mode .media-cutter-controls>#mediaCutModeBtn{display:inline-flex!important;order:2!important;align-items:center;justify-content:center;width:42px;height:42px;padding:0!important;border:1px solid rgba(149,235,255,.4)!important;border-radius:11px!important;background:#273477!important;color:transparent!important;font-size:0!important;line-height:1!important;cursor:pointer}.media-mode .media-cutter-controls>#mediaCutModeBtn:before{content:'⇄';color:#f5f3ff;font-size:22px}.media-mode .media-cutter-controls>#mediaCutModeBtn:hover{background:#3651a1!important}
+  .media-mode .media-download-btn{display:none!important}
+  .media-mode .media-workspace audio,.media-mode .media-workspace video{display:block!important;width:min(100%,420px)!important;max-height:72px!important;margin:0 auto 4px!important;opacity:.96!important}
+  .media-mode .media-step-buttons{display:inline-flex;gap:3px;order:2;padding:4px;border-radius:10px;background:#11194d}.media-mode .media-step-buttons button{width:27px;height:27px;border:0;border-radius:6px;background:#28387f;color:#fff;font-weight:800;cursor:pointer}.media-mode .media-step-buttons button:hover{background:#3b56a4}
+  .media-mode #mediaNudgeControls{display:none!important}
+  .media-mode #mediaPositionFields{display:none!important}.media-mode #mediaStepButtons{display:inline-flex!important;order:1!important;gap:4px;padding:5px 7px;border:1px solid rgba(127,153,255,.65);border-radius:13px;background:#11194d;box-shadow:0 7px 18px rgba(5,5,35,.2)}.media-mode #mediaStepButtons button{width:32px;height:32px;border:0;border-radius:7px;background:#28387f;color:#fff;font-weight:800;cursor:pointer}.media-mode #mediaStepButtons button:hover{background:#3b56a4}
+</style>
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="/convertit/" aria-label="Convertit - trang chủ">
+      <img class="brand-mark" src="/assets/favicon.svg" alt="Logo Sentinel"><span>convertit</span>
+    </a>
+    <div class="privacy-pill"><span></span> Xử lý riêng tư trên thiết bị</div>
+    <div class="top-actions"><button id="themeToggle" class="theme-toggle" title="Đổi giao diện">◐</button><a class="back-link" href="/">Sentinel ↗</a></div>
+  </header>
+
+  <main>
+    <section id="welcome" class="welcome">
+      <div class="hero-copy">
+        <p class="eyebrow">PDF · WORD · HÌNH ẢNH. MỘT KHÔNG GIAN.</p>
+        <h1>Đổi file.<br><em>Sửa trực tiếp.</em></h1>
+        <p class="hero-sub">Thả tài liệu, PDF hoặc ảnh vào đây. Xem trước, viết, tô, tẩy, thêm chữ rồi tải xuống — không cần qua bước lưu rườm rà.</p>
+      </div>
+      <label id="dropzone" class="dropzone" tabindex="0">
+        <input id="fileInput" type="file" accept="image/*,audio/*,video/*,.pdf,.doc,.docx,.pptx,.odt,.odp,.epub,.rtf,.xlsx,.xls,.xlsb,.ods,.dxf,.txt,.md,.csv,.html,.htm,.json" hidden>
+        <span class="drop-icon">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 16V4m0 0L7.5 8.5M12 4l4.5 4.5M5 14v5h14v-5"/></svg>
+        </span>
+        <strong>Thả file vào để bắt đầu</strong>
+        <span>hoặc <u>chọn từ thiết bị</u></span>
+        <small>Tối đa 100 MB · File không rời khỏi thiết bị của bạn</small>
+      </label>
+      <button id="restoreDraftBtn" class="restore-draft" hidden><span>↶</span><div><b>Khôi phục bản nháp gần nhất</b><small id="restoreDraftMeta"></small></div></button>
+      <div class="format-row" aria-label="Định dạng hỗ trợ">
+        <span>PDF</span><span>DOC/DOCX</span><span>PPTX</span><span>EPUB</span><span>RTF</span><span>XLSX</span><span>ODS</span><span>DXF</span><span>JPG</span><span>PNG</span><span>SVG</span><span>WAV</span><span>WEBM</span>
+      </div>
+      <div class="feature-grid">
+        <article><b>01</b><h2>Tải file</h2><p>Chọn PDF, DOCX, ảnh hoặc tài liệu văn bản từ thiết bị.</p></article>
+        <article><b>02</b><h2>Sửa trực tiếp</h2><p>Viết, tẩy, cắt, thêm chữ, chèn ảnh và xem toàn bộ tài liệu.</p></article>
+        <article><b>03</b><h2>Chọn & tải</h2><p>Chọn định dạng đầu ra rồi tải file đã chỉnh sửa xuống thiết bị.</p></article>
+      </div>
+
+      <section class="landing-section quick-section" aria-labelledby="quickTitle">
+        <div class="section-heading"><div><p class="eyebrow">BẮT ĐẦU NHANH</p><h2 id="quickTitle">Chuyển đổi phổ biến</h2></div><p>Chọn tác vụ, sau đó mở file tương ứng từ thiết bị.</p></div>
+        <div class="quick-grid">
+          <button class="quick-convert" data-accept=".pdf" data-output="docx-fidelity"><span>PDF</span><i>→</i><span>WORD</span><small>Giữ bố cục theo từng trang</small></button>
+          <button class="quick-convert" data-accept=".docx" data-output="pdf"><span>WORD</span><i>→</i><span>PDF</span><small>Tạo tài liệu PDF để chia sẻ</small></button>
+          <button class="quick-convert" data-accept="image/jpeg,.jpg,.jpeg" data-output="png"><span>JPG</span><i>→</i><span>PNG</span><small>Xuất ảnh không giảm chất lượng</small></button>
+          <button class="quick-convert" data-accept="image/*" data-output="pdf"><span>ẢNH</span><i>→</i><span>PDF</span><small>Tạo PDF theo kích thước ảnh</small></button>
+          <button class="quick-convert" data-accept=".xlsx,.xls,.xlsb,.ods" data-output="pdf"><span>EXCEL</span><i>→</i><span>PDF</span><small>Mở, sửa bảng và xuất PDF</small></button>
+        </div>
+      </section>
+
+      <section class="landing-section privacy-section" aria-labelledby="privacyTitle">
+        <div class="privacy-copy"><p class="eyebrow">QUYỀN RIÊNG TƯ</p><h2 id="privacyTitle">File ở lại trên thiết bị của bạn.</h2><p>Convertit xử lý nội dung ngay trong trình duyệt. Phiên chỉnh sửa kết thúc khi bạn đóng hoặc tải lại trang.</p></div>
+        <div class="trust-list"><div><b>01</b><strong>Không tải lên máy chủ</strong><small>Nội dung được đọc và xử lý cục bộ.</small></div><div><b>02</b><strong>Không cần tài khoản</strong><small>Mở file và bắt đầu chỉnh sửa ngay.</small></div><div><b>03</b><strong>Bạn kiểm soát đầu ra</strong><small>Chỉ tải xuống khi đã kiểm tra xong.</small></div></div>
+      </section>
+
+      <section class="landing-section support-section" aria-labelledby="supportTitle">
+        <div class="section-heading"><div><p class="eyebrow">HỖ TRỢ HIỆN TẠI</p><h2 id="supportTitle">Định dạng rõ ràng, không hứa quá.</h2></div><p>Giới hạn mỗi file: 100 MB.</p></div>
+        <div class="support-grid"><div><span>ĐẦU VÀO</span><p>PDF · DOC/DOCX · PPTX · ODT · ODP · EPUB · RTF · XLSX · XLS · ODS · DXF · ảnh · âm thanh · video · văn bản</p></div><div><span>ĐẦU RA</span><p>PDF · DOC/DOCX · XLSX · XLS · ODS · CSV · PNG · JPG · WEBP · SVG · WAV · WEBM · TXT · HTML</p></div></div>
+      </section>
+
+      <section class="landing-section faq-section" aria-labelledby="faqTitle">
+        <div class="section-heading"><div><p class="eyebrow">CÂU HỎI THƯỜNG GẶP</p><h2 id="faqTitle">Trước khi bạn bắt đầu</h2></div></div>
+        <div class="faq-list">
+          <details><summary>Convertit có lưu bản nháp sau khi đóng trang không?</summary><p>Có. Bản nháp gần nhất được lưu cục bộ bằng IndexedDB và có thể khôi phục khi mở lại trang. File lớn vẫn phụ thuộc dung lượng trống của trình duyệt.</p></details>
+          <details><summary>PDF scan có nhận diện được chữ không?</summary><p>Có. Mở công cụ Chữ và chọn “Nhận diện chữ Việt–Anh” để quét trang hiện tại. Bạn có thể sửa, sao chép hoặc chèn kết quả OCR lên tài liệu.</p></details>
+          <details><summary>Word xuất từ PDF có sửa được không?</summary><p>Chế độ giữ bố cục đưa từng trang vào Word dưới dạng hình ảnh. Chế độ lấy chữ có thể sửa nội dung nhưng không giữ chính xác toàn bộ bố cục.</p></details>
+          <details><summary>Chất lượng file xuất được kiểm soát thế nào?</summary><p>PNG không dùng nén mất dữ liệu; JPG và WEBP cho phép chọn mức chất lượng. Kết quả còn phụ thuộc độ phân giải của file đầu vào.</p></details>
+        </div>
+      </section>
+
+      <footer class="landing-footer"><div class="footer-brand"><img src="/assets/favicon.svg" alt=""><div><strong>Convertit</strong><small>Một công cụ thuộc hệ sinh thái Sentinel.</small></div></div></footer>
+    </section>
+
+    <section id="workspace" class="workspace" hidden>
+      <aside class="file-panel">
+        <div class="panel-head"><span>TỆP ĐANG MỞ</span><button id="newFile" title="Mở file khác">＋</button></div>
+        <div class="file-card">
+          <div id="fileBadge" class="file-badge">FILE</div>
+          <div><strong id="fileName">—</strong><span id="fileMeta">—</span></div>
+        </div>
+        <div id="pageList" class="page-list"></div>
+        <div id="pdfSearchPanel" class="pdf-search" hidden><label>TÌM TRONG PDF<input id="pdfSearchInput" type="search" placeholder="Nhập từ hoặc cụm từ…"></label><button id="pdfSearchBtn">Tìm</button><div id="pdfSearchResults"></div></div>
+        <div class="autosave"><span></span><div><strong>Đã lưu trong phiên</strong><small>Mọi thay đổi được cập nhật tự động</small></div></div>
+        <div class="left-export">
+          <div class="panel-head"><span>XUẤT TỆP</span></div>
+          <label class="field"><span>Định dạng đầu ra</span><select id="outputFormat"></select></label>
+          <label id="qualityField" class="field"><span>Mức chất lượng / nén</span><input id="qualityInput" type="range" min="20" max="100" value="92"><output id="qualityOutput">92% · Rất cao</output><small id="qualityHint">Chất lượng cao hơn sẽ tạo file lớn hơn.</small></label>
+          <button id="downloadBtn" class="download-btn"><span>Tải file xuống</span><b>↓</b></button>
+          <p id="exportHint" class="export-hint">Chỉnh sửa sẽ được gộp vào file tải xuống.</p>
+        </div>
+      </aside>
+
+      <section class="editor-shell">
+        <div class="toolbar" role="toolbar" aria-label="Công cụ chỉnh sửa">
+          <div class="tool-group">
+            <button class="tool active" data-tool="select" title="Chọn / di chuyển"><span>↖</span><small>Chọn</small></button>
+            <button class="tool" data-tool="pen" title="Bút vẽ"><span>✎</span><small>Bút</small></button>
+            <button class="tool" data-tool="crop" title="Căn chỉnh và cắt"><span>⌗</span><small>Căn chỉnh</small></button>
+            <button class="tool" data-tool="eraser" title="Tẩy nét"><span>⌫</span><small>Tẩy</small></button>
+            <button class="tool" data-tool="text" title="Thêm chữ"><span>T</span><small>Chữ</small></button>
+            <button class="tool" data-tool="image" title="Thêm hoặc thay ảnh"><span>▧</span><small>Ảnh</small></button>
+            <button class="tool" data-tool="pdf" title="Công cụ PDF"><span>▤</span><small>PDF</small></button>
+          </div>
+          <div class="tool-options">
+            <button id="undoBtn" class="icon-btn" title="Hoàn tác" disabled>↶</button>
+            <button id="redoBtn" class="icon-btn" title="Làm lại" disabled>↷</button>
+            <button id="clearBtn" class="icon-btn danger" title="Xóa mọi chỉnh sửa">⌦</button>
+          </div>
+        </div>
+
+        <div id="stageWrap" class="stage-wrap">
+          <div id="loading" class="loading" hidden><span></span><b>Đang chuẩn bị tài liệu…</b></div>
+          <div id="pdfStack" class="pdf-stack">
+            <div id="canvasStage" class="canvas-stage">
+              <canvas id="baseCanvas"></canvas>
+              <canvas id="drawCanvas"></canvas>
+              <div id="cropBox" class="crop-box" hidden>
+                <i data-handle="nw"></i><i data-handle="ne"></i><i data-handle="sw"></i><i data-handle="se"></i>
+                <span class="crop-size"></span>
+              </div>
+            </div>
+          </div>
+          <div id="docEditor" class="doc-editor" contenteditable="true" spellcheck="true" hidden></div>
+        </div>
+
+        <footer class="statusbar">
+          <span id="statusText">Sẵn sàng</span>
+          <div class="zoom-controls"><button id="zoomOut">−</button><output id="zoomOutput">100%</output><button id="zoomIn">＋</button><button id="fitBtn">Vừa màn hình</button></div>
+        </footer>
+      </section>
+
+      <aside class="inspector-panel">
+        <div class="inspector-head"><span>THUỘC TÍNH</span><b id="inspectorTitle">Chọn</b></div>
+
+        <section class="context-panel" data-context="select">
+          <div class="context-empty"><i>↖</i><h2>Chọn công cụ</h2><p>Thuộc tính của bút, chữ và các công cụ sẽ xuất hiện tại đây.</p></div>
+          <div class="template-tools"><p class="eyebrow">TẠO NHANH</p><select id="templateSelect"><option value="">Chọn mẫu tài liệu…</option><option value="cv">CV tối giản</option><option value="contract">Hợp đồng cơ bản</option><option value="quote">Báo giá</option><option value="invoice">Hóa đơn</option></select><button id="createTemplateBtn" class="secondary-btn">Tạo mẫu để sửa</button><button id="compareDocBtn" class="secondary-btn">So sánh với tài liệu khác</button></div>
+        </section>
+
+        <section class="context-panel" data-context="pdf" hidden>
+          <p class="eyebrow">CÔNG CỤ PDF</p><h2>Trang, bảo mật nhẹ & xuất</h2>
+          <div class="pdf-page-actions"><button id="pageMoveUp" class="secondary-btn">↑ Đưa trang lên</button><button id="pageMoveDown" class="secondary-btn">↓ Đưa trang xuống</button><button id="deletePdfPage" class="secondary-btn danger-btn">Xóa trang hiện tại</button><button id="restorePdfPages" class="secondary-btn">Khôi phục thứ tự</button></div>
+          <button id="mergePdfBtn" class="scan-btn"><span>⊞</span><div><b>Gộp thêm PDF</b><small>Chọn nhiều PDF, gộp cục bộ và tải một file</small></div></button>
+          <button id="splitPdfBtn" class="secondary-btn">Tách PDF thành từng trang ZIP</button>
+          <label class="inspector-field"><span>Watermark</span><input id="watermarkText" maxlength="80" placeholder="Ví dụ: BẢN NHÁP"></label>
+          <div class="crop-fields"><label><span>Độ mờ</span><input id="watermarkOpacity" type="number" min="5" max="95" value="18"><small>%</small></label><label><span>Góc</span><input id="watermarkAngle" type="number" min="-90" max="90" value="-35"><small>°</small></label></div>
+          <button id="applyWatermarkBtn" class="secondary-btn">Áp dụng watermark mọi trang</button>
+          <label class="inspector-field"><span>Tiêu đề PDF</span><input id="pdfTitleMeta" maxlength="120" placeholder="Tiêu đề tài liệu"></label>
+          <label class="inspector-field"><span>Tác giả</span><input id="pdfAuthorMeta" maxlength="120" placeholder="Tác giả"></label>
+          <label class="inspector-field"><span>Đầu trang</span><input id="pdfHeaderText" maxlength="120" placeholder="Ví dụ: Tài liệu nội bộ"></label>
+          <label class="inspector-field"><span>Cuối trang</span><input id="pdfFooterText" maxlength="120" placeholder="Ví dụ: hnxxuan.online"></label>
+          <label class="check-field"><input id="pdfPageNumbers" type="checkbox"> Đánh số trang khi xuất</label>
+          <div class="pdf-page-actions"><button id="exportPageImagesBtn" class="secondary-btn">Xuất ảnh từng trang</button><button id="compressPdfBtn" class="secondary-btn">Xuất PDF nén</button></div>
+          <p class="context-help">Mật khẩu PDF và chữ ký số chuẩn cần engine mã hóa/chứng thư chuyên dụng nên không chạy cục bộ trong bản này.</p>
+        </section>
+
+        <section class="context-panel" data-context="draw" hidden>
+          <p class="eyebrow">NÉT VẼ</p>
+          <h2 id="drawTitle">Bút vẽ</h2>
+          <label class="inspector-field"><span>Kích thước nét <output id="sizeOutput">5 px</output></span><input id="sizeInput" type="range" min="1" max="48" value="5"></label>
+          <div class="stroke-preview"><span id="strokePreview"></span></div>
+          <div class="image-actions"><button id="addRectVector" class="secondary-btn">＋ Hình chữ nhật</button><button id="addEllipseVector" class="secondary-btn">＋ Hình tròn</button></div>
+          <div id="drawColorControls">
+            <label class="inspector-field"><span>Màu bút</span><span class="color-picker-row"><input id="colorInput" type="color" value="#e8553d"><b id="colorSwatch">#E8553D</b></span></label>
+            <button id="pickColorBtn" class="secondary-btn"><span>◉</span> Lấy màu từ tài liệu</button>
+            <p class="context-help">Chọn lấy màu rồi chạm vào bất kỳ điểm nào trên tài liệu.</p>
+          </div>
+          <div id="eraserControls" hidden>
+            <label class="inspector-field"><span>Chế độ tẩy</span><select id="eraserMode"><option value="annotation">Xóa nét đã thêm</option><option value="whiteout">Tẩy nội dung gốc</option></select></label>
+            <div class="eraser-explain"><span id="eraserIcon">⌫</span><div><b id="eraserModeTitle">Xóa trong suốt</b><small id="eraserModeHelp">Xóa thật các nét bút, chữ và ảnh bạn vừa thêm.</small></div></div>
+          </div>
+        </section>
+
+        <section class="context-panel" data-context="crop" hidden>
+          <p class="eyebrow">CĂN CHỈNH</p>
+          <h2>Cắt & xoay</h2>
+          <div class="angle-actions"><button id="rotateLeft" title="Xoay trái 90 độ">↶ <small>90°</small></button><button id="rotateRight" title="Xoay phải 90 độ">↷ <small>90°</small></button></div>
+          <p class="context-help">Kéo khung và bốn điểm ở góc trên tài liệu, hoặc nhập chính xác số pixel cần cắt.</p>
+          <div class="crop-fields">
+            <label><span>Trên</span><input id="cropTop" type="number" min="0" value="0"><small>px</small></label>
+            <label><span>Phải</span><input id="cropRight" type="number" min="0" value="0"><small>px</small></label>
+            <label><span>Dưới</span><input id="cropBottom" type="number" min="0" value="0"><small>px</small></label>
+            <label><span>Trái</span><input id="cropLeft" type="number" min="0" value="0"><small>px</small></label>
+          </div>
+          <button id="applyCropBtn" class="primary-action">Áp dụng vùng cắt</button>
+          <button id="confirmReplaceRegionBtn" class="primary-action" hidden>Dùng vùng này để thay ảnh</button>
+          <button id="resetCropBtn" class="secondary-btn">Khôi phục kích thước gốc</button>
+        </section>
+
+        <section class="context-panel" data-context="text" hidden>
+          <p class="eyebrow">ĐỊNH DẠNG CHỮ</p>
+          <h2>Văn bản</h2>
+          <label class="inspector-field"><span>Font chữ</span><select id="fontFamily"><option value="Arial">Arial</option><option value="Times New Roman">Times New Roman</option><option value="Calibri">Calibri</option><option value="Georgia">Georgia</option><option value="Verdana">Verdana</option><option value="Courier New">Courier New</option></select></label>
+          <label class="inspector-field"><span>Kích thước</span><select id="fontSize"><option>8</option><option>9</option><option>10</option><option>11</option><option selected>12</option><option>14</option><option>16</option><option>18</option><option>20</option><option>24</option><option>28</option><option>32</option><option>36</option><option>48</option><option>64</option><option>72</option></select></label>
+          <label class="inspector-field"><span>Màu chữ</span><input id="textColor" type="color" value="#17201d"></label>
+          <div id="pdfTextPrecision" class="precision-grid" hidden><label><span>Giãn chữ</span><input id="pdfLetterSpacing" type="number" min="-3" max="12" step="0.1" value="0"><small>px</small></label><label><span>Dòng</span><input id="pdfLineHeight" type="number" min="0.7" max="3" step="0.05" value="1.2"><small>×</small></label><label><span>Căn</span><select id="pdfTextAlign"><option value="left">Trái</option><option value="center">Giữa</option><option value="right">Phải</option></select></label></div>
+          <div class="format-buttons">
+            <button data-command="bold" title="In đậm"><b>B</b></button><button data-command="italic" title="In nghiêng"><i>I</i></button><button data-command="underline" title="Gạch chân"><u>U</u></button>
+            <button data-command="justifyLeft" title="Căn trái">≡</button><button data-command="justifyCenter" title="Căn giữa">≣</button><button data-command="justifyRight" title="Căn phải">≡</button>
+          </div>
+          <button id="scanTextBtn" class="scan-btn"><span>⌁</span><div><b>Quét định dạng tài liệu</b><small>Phân tích từng ký tự và tìm kiểu chữ dùng nhiều nhất</small></div></button>
+          <div id="scanResult" class="scan-result" hidden></div>
+          <p id="pdfTextHint" class="context-help" hidden>Di chuột lên trang PDF để thấy từng khung chữ. Bấm vào khung để sửa hoặc xóa ngay tại đúng vị trí.</p>
+          <button id="ocrBtn" class="scan-btn"><span>OCR</span><div><b>Nhận diện chữ Việt–Anh</b><small>Quét trang PDF hoặc ảnh hiện tại ngay trên thiết bị</small></div></button>
+          <div class="ocr-prep"><label><input id="ocrGrayscale" type="checkbox" checked> Trắng đen</label><label><input id="ocrThreshold" type="checkbox"> Làm trắng nền</label><label><input id="ocrUpscale" type="checkbox"> Phóng lớn 2×</label></div>
+          <div id="ocrResult" class="ocr-result" hidden><label>Văn bản nhận diện được<textarea id="ocrText" rows="10"></textarea></label><small id="ocrStructureInfo"></small><div><button id="copyOcrBtn" class="secondary-btn">Sao chép văn bản</button><button id="insertOcrBtn" class="secondary-btn">Chèn vào tài liệu</button><button id="structureOcrBtn" class="secondary-btn">Dựng dòng, bảng & cột</button><button id="ocrTableBtn" class="secondary-btn">Mở bảng OCR để sửa</button><button id="ocrWordBtn" class="secondary-btn">Tải bảng OCR dạng Word</button></div></div>
+          <button id="redactSensitiveBtn" class="secondary-btn">Che tự động email, SĐT & số định danh</button>
+          <button id="editPdfTextBtn" hidden aria-hidden="true"></button>
+        </section>
+
+        <section class="context-panel" data-context="image" hidden>
+          <p class="eyebrow">HÌNH ẢNH</p><h2>Thêm hoặc thay ảnh</h2>
+          <button id="insertImageBtn" class="scan-btn"><span>▧</span><div><b>Chọn ảnh từ thiết bị</b><small>Chèn vào tài liệu hoặc trang hiện tại</small></div></button>
+          <button id="batchImageBtn" class="scan-btn"><span>⊞</span><div><b>Xử lý nhiều ảnh</b><small>Đổi kích thước, nén, bỏ EXIF rồi tải ZIP</small></div></button>
+          <button id="replaceImageRegionBtn" class="secondary-btn">Chọn vùng ảnh có sẵn để thay</button>
+          <div id="imageObjectControls" hidden>
+            <div class="crop-fields image-size-fields">
+              <label><span>Chiều rộng</span><input id="imageWidth" type="number" min="20"><small>px</small></label>
+              <label><span>Chiều cao</span><input id="imageHeight" type="number" min="20"><small>px</small></label>
+            </div>
+            <label class="inspector-field"><span>Xoay tự do <output id="imageRotationOutput">0°</output></span><input id="imageRotation" type="range" min="-180" max="180" value="0"></label>
+            <label class="inspector-field"><span>Độ sáng</span><input id="imageBrightness" type="range" min="0" max="200" value="100"></label>
+            <label class="inspector-field"><span>Tương phản</span><input id="imageContrast" type="range" min="0" max="200" value="100"></label>
+            <div class="image-actions"><button id="flipImageX" class="secondary-btn">Lật ngang</button><button id="flipImageY" class="secondary-btn">Lật dọc</button><button id="imageForward" class="secondary-btn">Đưa lên</button><button id="imageBackward" class="secondary-btn">Đưa xuống</button></div>
+            <button id="removeImageBg" class="secondary-btn">Xóa nền theo màu góc ảnh</button>
+            <button id="deleteImageBtn" class="secondary-btn danger-btn">Xóa ảnh đang chọn</button>
+          </div>
+          <p class="context-help">Kéo giữa ảnh để di chuyển. Kéo một trong bốn góc để thay đổi kích thước.</p>
+        </section>
+
+        <section class="context-panel" data-context="media" hidden>
+          <p class="eyebrow">ÂM THANH & VIDEO</p><h2>Cắt và xuất</h2>
+          <div class="media-fields"><label><span>Bắt đầu</span><input id="mediaStart" type="number" min="0" step="0.1" value="0"><small>giây</small></label><label><span>Kết thúc</span><input id="mediaEnd" type="number" min="0" step="0.1" value="0"><small>giây</small></label><label><span>Độ rộng video</span><select id="mediaWidth"><option value="0">Giữ nguyên</option><option value="1920">1920 px</option><option value="1280">1280 px</option><option value="854">854 px</option><option value="640">640 px</option></select></label><label><span>Bitrate</span><select id="mediaBitrate"><option value="8000000">8 Mbps</option><option value="5000000" selected>5 Mbps</option><option value="2500000">2.5 Mbps</option><option value="1000000">1 Mbps</option></select></label></div>
+          <label class="check-field"><input id="mediaMute" type="checkbox"> Tắt âm thanh khi xuất video</label>
+          <p class="context-help">Video được chuyển theo thời gian thực trên thiết bị. Đóng tab sẽ dừng quá trình.</p>
+        </section>
+
+        <div class="secure-note"><b>⌁ Chỉnh sửa cục bộ</b><p>Nội dung không được gửi lên máy chủ.</p></div>
+      </aside>
+    </section>
+  </main>
+
+  <div id="printSurface" aria-hidden="true"></div>
+  <div id="toast" class="toast" role="status"></div>
+  <input id="imageInput" type="file" accept="image/*" hidden>
+  <input id="mergePdfInput" type="file" accept="application/pdf,.pdf" multiple hidden>
+  <input id="batchImageInput" type="file" accept="image/*" multiple hidden>
+  <input id="compareDocInput" type="file" accept=".pdf,.doc,.docx,.txt,.md,.rtf,.odt,.html,.htm" hidden>
+  <script src="/convertit/vendor/pdf.min.js"></script>
+  <script src="/convertit/vendor/pdf-lib.min.js"></script>
+  <script src="/convertit/vendor/mammoth.browser.min.js"></script>
+  <script src="/convertit/vendor/html2canvas.min.js"></script>
+  <script src="/convertit/vendor/jspdf.umd.min.js"></script>
+  <script src="/convertit/vendor/jszip.min.js"></script>
+  <script src="/convertit/vendor/purify.min.js"></script>
+  <script src="/convertit/vendor/xlsx.full.min.js"></script>
+  <script src="/convertit/vendor/tesseract.min.js"></script>
+  <script src="/convertit/app.js?v=83"></script>
+</body>
+</html>

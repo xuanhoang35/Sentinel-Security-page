@@ -1,0 +1,11 @@
+{
+  "name": "Convertit — Chuyển đổi & chỉnh sửa file",
+  "short_name": "Convertit",
+  "start_url": "/convertit/",
+  "scope": "/convertit/",
+  "display": "standalone",
+  "background_color": "#f5f2eb",
+  "theme_color": "#14b8ff",
+  "description": "Chuyển đổi, xem trước và chỉnh sửa tài liệu ngay trên thiết bị.",
+  "icons": [{"src":"/assets/favicon.svg","sizes":"any","type":"image/svg+xml","purpose":"any maskable"}]
+}

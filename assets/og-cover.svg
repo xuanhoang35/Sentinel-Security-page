@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="Sentinel Shield Infrastructure Security">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#07101d" />
+      <stop offset="100%" stop-color="#0f2f52" />
+    </linearGradient>
+    <linearGradient id="g" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#30f2b0" />
+      <stop offset="100%" stop-color="#14b8ff" />
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)" />
+  <g opacity="0.16" stroke="#8fb3d9">
+    <path d="M0 120h1200M0 220h1200M0 320h1200M0 420h1200M0 520h1200" />
+    <path d="M120 0v630M260 0v630M400 0v630M540 0v630M680 0v630M820 0v630M960 0v630M1100 0v630" />
+  </g>
+  <rect x="90" y="80" width="1020" height="470" rx="28" fill="#0d1b2f" opacity="0.88" />
+  <text x="140" y="190" fill="#30f2b0" font-size="30" font-family="'IBM Plex Mono', monospace" letter-spacing="2">SENTINEL SHIELD</text>
+  <text x="140" y="280" fill="#e8f0fc" font-size="64" font-family="'Space Grotesk', sans-serif" font-weight="700">
+    Infrastructure Security
+  </text>
+  <text x="140" y="350" fill="#e8f0fc" font-size="64" font-family="'Space Grotesk', sans-serif" font-weight="700">
+    for Enterprise Teams
+  </text>
+  <text x="140" y="430" fill="#9bb0cc" font-size="30" font-family="'Space Grotesk', sans-serif">
+    Server Hardening • WAF/IDS • SIEM/SOC • Backup &amp; DR
+  </text>
+  <path d="M980 180 890 216v60c0 60 39 102 90 118 51-16 90-58 90-118v-60l-90-36Zm0 28 56 22v46c0 36-20 64-56 78-36-14-56-42-56-78v-46l56-22Z" fill="url(#g)" />
+</svg>
