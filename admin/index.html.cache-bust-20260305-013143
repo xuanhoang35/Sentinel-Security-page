@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex,nofollow" />
+    <meta name="referrer" content="strict-origin-when-cross-origin" />
+    <title>Sentinel Admin Dashboard</title>
+    <link rel="icon" type="image/svg+xml" href="/assets/favicon.svg" />
+    <link rel="stylesheet" href="/assets/admin.css" />
+  </head>
+  <body class="admin-body">
+    <main class="admin-dashboard">
+      <header class="admin-topbar">
+        <div>
+          <p class="admin-eyebrow">Sentinel Shield</p>
+          <h1>Quản lý lead</h1>
+        </div>
+        <button id="admin-logout-btn" type="button">Đăng xuất</button>
+      </header>
+
+      <section class="admin-panel">
+        <div class="admin-panel-head">
+          <h2>Danh sách lead</h2>
+          <div class="admin-toolbar-actions">
+            <button id="admin-export-btn" type="button">Xuất CSV</button>
+            <button id="admin-refresh-btn" type="button">Tải lại</button>
+          </div>
+        </div>
+
+        <form id="admin-filter-form" class="admin-filter-grid">
+          <label>
+            Email
+            <input id="admin-filter-email" name="email" type="search" placeholder="lead@company.com" />
+          </label>
+          <label>
+            Số điện thoại
+            <input id="admin-filter-phone" name="phone" type="search" placeholder="09xxxxxxxx" />
+          </label>
+          <label>
+            Trạng thái
+            <select id="admin-filter-status" name="status">
+              <option value="all">Tất cả</option>
+              <option value="new">Mới</option>
+              <option value="processed">Đã xử lý</option>
+            </select>
+          </label>
+          <label>
+            Từ ngày
+            <input id="admin-filter-date-from" name="dateFrom" type="date" />
+          </label>
+          <label>
+            Đến ngày
+            <input id="admin-filter-date-to" name="dateTo" type="date" />
+          </label>
+          <div class="admin-filter-actions">
+            <button id="admin-filter-apply" type="submit">Lọc</button>
+            <button id="admin-filter-clear" type="button" class="admin-secondary-btn">Xóa lọc</button>
+          </div>
+        </form>
+
+        <p id="admin-dashboard-note" class="admin-note" aria-live="polite"></p>
+        <div class="admin-table-wrap">
+          <table>
+            <thead>
+              <tr>
+                <th>Thời gian</th>
+                <th>Họ tên</th>
+                <th>Email</th>
+                <th>Số điện thoại</th>
+                <th>Trạng thái</th>
+                <th>Nội dung</th>
+                <th>Tác vụ</th>
+              </tr>
+            </thead>
+            <tbody id="admin-leads-body"></tbody>
+          </table>
+        </div>
+      </section>
+    </main>
+    <script src="/assets/admin-dashboard.js" defer></script>
+  </body>
+</html>
